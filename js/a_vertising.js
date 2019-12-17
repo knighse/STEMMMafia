@@ -23,13 +23,28 @@ function redir(link) {
 document.addEventListener("scroll", () => {
 	let sections = document.getElementsByClassName("section-inner");
 	for (let i = 0; i < sections.length; i++) {
-		if (isElementInViewport(sections[i])) {
+		if (isElementMostlyVisible(sections[i])) {
 			sections[i].classList.add("fade-in");
 		}
 	}
+
+	let navbar = document.getElementsByClassName("navbar")[0];
+	let headerOuter = document.getElementsByClassName("header-outer")[0];
+	if (isNavbarAboveScreen(headerOuter, navbar)) {
+		navbar.style.position = "fixed";
+		headerOuter.style.color = "black";
+	} else {
+		navbar.style.position = "relative";
+		headerOuter.style.color = "white";
+	}
 });
 
-function isElementInViewport (el) {
+function isElementMostlyVisible (el) {
     var rect = el.getBoundingClientRect();
     return (rect.top <= (window.innerHeight - (el.clientHeight/1.5) || document.documentElement.clientHeight - (el.clientHeight/1.5)));
+}
+
+function isNavbarAboveScreen(el, nav) {
+    var rect = el.getBoundingClientRect();
+    return (rect.bottom <= nav.clientHeight);
 }
