@@ -19,3 +19,17 @@ function dllogo() {
 function redir(link) {
 	window.location.href = link;
 }
+
+document.addEventListener("scroll", () => {
+	let sections = document.getElementsByClassName("section-inner");
+	for (let i = 0; i < sections.length; i++) {
+		if (isElementInViewport(sections[i])) {
+			sections[i].classList.add("fade-in");
+		}
+	}
+});
+
+function isElementInViewport (el) {
+    var rect = el.getBoundingClientRect();
+    return (rect.top <= (window.innerHeight - (el.clientHeight/1.5) || document.documentElement.clientHeight - (el.clientHeight/1.5)));
+}
