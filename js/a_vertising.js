@@ -25,17 +25,22 @@ document.addEventListener("scroll", () => {
 	for (let i = 0; i < sections.length; i++) {
 		if (isElementMostlyVisible(sections[i])) {
 			sections[i].classList.add("fade-in");
+		} else {
+			sections[i].classList.remove("fade-in");
 		}
 	}
 
 	let navbar = document.getElementsByClassName("navbar")[0];
 	let headerOuter = document.getElementsByClassName("header-outer")[0];
+	let logo = document.getElementsByClassName("logo")[0];
 	if (isNavbarAboveScreen(headerOuter, navbar)) {
 		navbar.style.position = "fixed";
 		headerOuter.style.color = "black";
+		logo.style.opacity = 0;
 	} else {
 		navbar.style.position = "relative";
 		headerOuter.style.color = "white";
+		logo.style.opacity = 1;
 	}
 });
 
